@@ -1,0 +1,62 @@
+<script setup>
+import { Link } from '@inertiajs/vue3';
+
+defineProps({
+    invoices: {
+        type: Object,
+    },
+});
+</script>
+
+<template>
+    <div class="overflow-x-auto">
+        <table class="table">
+            <!-- head -->
+            <thead>
+                <tr>
+                    <th>Invoice id</th>
+                    <th>Client name</th>
+                    <th>Due date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody> <!-- row 1 -->
+                <tr v-for="invoice in invoices" v-if="invoices.length">
+
+                    <td>
+                        {{ invoice.id }}
+                    </td>
+                    <td>
+                        <div class="flex items-center gap-3">
+                            <div>
+                                <div class="font-bold">{{ invoice.client_name }}</div>
+                                <div class="text-sm opacity-50">{{ invoice.client_country }}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        {{ invoice.due_date }}
+                    </td>
+                    <td>£ {{ invoice.total }}</td>
+                    <td>
+                        <div class="badge bg-green-500 text-white">Completed</div>
+                    </td>
+                    <th>
+                        <Link class="btn btn-primary btn-sm" :href="route('invoice.show', { invoice: invoice.id })">
+                        Details
+                        </Link>
+                    </th>
+                </tr>
+                <tr v-else>
+                    <td colspan="6">
+                        <p class="text-center text-sm">You don't have any invoice!
+                            <Link :href="route('invoice.create')">Create one</Link>
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
