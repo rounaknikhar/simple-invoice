@@ -6,6 +6,8 @@ use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
 use App\Models\Invoice;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class InvoiceController extends Controller
@@ -59,9 +61,14 @@ class InvoiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateInvoiceRequest $request, Invoice $invoice)
+    public function update(UpdateInvoiceRequest $request, Invoice $invoice): RedirectResponse
     {
-        //
+        // Retrieve the validated input data.
+        $validated = $request->validated();
+        // Update validated data.
+        $invoice->update($validated);
+        
+        return Redirect::route('invoice.show', ['invoice' => $invoice->id]);
     }
 
     /**

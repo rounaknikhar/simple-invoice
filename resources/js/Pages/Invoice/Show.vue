@@ -1,6 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+import EditInvoiceModal from './_partials/EditInvoiceModal.vue';
 
 defineProps({
     invoice: {
@@ -21,6 +22,8 @@ defineProps({
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <button class="btn" onclick="editInvoiceModal.showModal()">Edit Invoice</button>
+                    <EditInvoiceModal :invoice="invoice" />
                     <pre>
                 {{ invoice }}
             </pre>
