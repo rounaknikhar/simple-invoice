@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('invoices', function (Blueprint $table) {
+            $table->longText('note')->after('total')->nullable();
             $table->string('status')->after('total')->default(1);
         });
     }
@@ -23,6 +24,7 @@ return new class extends Migration
     {
         Schema::table('invoices', function (Blueprint $table) {
             $table->removeColumn('status');
+            $table->removeColumn('note');
         });
     }
 };

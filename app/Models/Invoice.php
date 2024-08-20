@@ -36,6 +36,7 @@ class Invoice extends Model
         'sub_total', 
         'vat_percentage', 
         'total',
+        'note',
         'status',
         'user_id'
     ];

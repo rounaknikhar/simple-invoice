@@ -31,6 +31,7 @@ const form = useForm({
     'sub_total': props.invoice.sub_total,
     'vat_percentage': props.invoice.vat_percentage,
     'total': props.invoice.total,
+    'note': props.invoice.note,
 })
 
 function submit() {
@@ -277,7 +278,7 @@ function submit() {
                                 </span>
                             </div>
                             <input type="text" v-model="form.client_county" class="input input-bordered w-full "
-                                :class="form.errors?.client_county ? 'border-red-600' : ''" />
+                                :class="form.errors?.client_county ? 'border-red-600' : ''" placeholder="County" />
                             <!-- Error message -->
                             <span v-if="form.errors?.client_county" class="label-text-alt text-red-600 my-2">
                                 {{ form.errors?.client_county }}
@@ -292,7 +293,7 @@ function submit() {
                                 </span>
                             </div>
                             <input type="text" v-model="form.client_postcode" class="input input-bordered w-full "
-                                :class="form.errors?.client_postcode ? 'border-red-600' : ''" />
+                                :class="form.errors?.client_postcode ? 'border-red-600' : ''" placeholder="Postcode" />
                             <!-- Error message -->
                             <span v-if="form.errors?.client_postcode" class="label-text-alt text-red-600 my-2">
                                 {{ form.errors?.client_postcode }}
@@ -308,7 +309,7 @@ function submit() {
                             </div>
                             <input type="number" min="0" step=".01" v-model="form.sub_total"
                                 class="input input-bordered w-full "
-                                :class="form.errors?.sub_total ? 'border-red-600' : ''" />
+                                :class="form.errors?.sub_total ? 'border-red-600' : ''" placeholder="Sub total" />
                             <!-- Error message -->
                             <span v-if="form.errors?.sub_total" class="label-text-alt text-red-600 my-2">
                                 {{ form.errors?.sub_total }}
@@ -324,7 +325,8 @@ function submit() {
                             </div>
                             <input type="number" min="0" v-model="form.vat_percentage"
                                 class="input input-bordered w-full "
-                                :class="form.errors?.vat_percentage ? 'border-red-600' : ''" />
+                                :class="form.errors?.vat_percentage ? 'border-red-600' : ''"
+                                placeholder="Vat percentage" />
                             <!-- Error message -->
                             <span v-if="form.errors?.vat_percentage" class="label-text-alt text-red-600 my-2">
                                 {{ form.errors?.vat_percentage }}
@@ -339,7 +341,7 @@ function submit() {
                                 </span>
                             </div>
                             <input type="number" min="0" step=".01" v-model="form.total"
-                                class="input input-bordered w-full "
+                                class="input input-bordered w-full" placeholder="Total"
                                 :class="form.errors?.total ? 'border-red-600' : ''" />
                             <!-- Error message -->
                             <span v-if="form.errors?.total" class="label-text-alt text-red-600 my-2">
@@ -347,7 +349,17 @@ function submit() {
                             </span>
                         </label>
 
-                        <button type="submit" class="btn btn-primary" :disabled="form.processing"
+                        <label class="py-2 form-control w-full ">
+                            <div class="label">
+                                <span class="label-text">
+                                    Note
+                                </span>
+                            </div>
+                            <textarea class="textarea textarea-bordered w-full" placeholder="Note"
+                                v-model="form.note"></textarea>
+                        </label>
+
+                        <button type="submit" class="btn btn-primary mt-4" :disabled="form.processing"
                             :class="!form.isDirty ? 'btn-disabled' : ''">Update</button>
                     </div>
                 </div>
