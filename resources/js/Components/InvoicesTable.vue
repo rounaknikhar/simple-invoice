@@ -1,5 +1,6 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
+import StatusBadge from './StatusBadge.vue';
 
 defineProps({
     invoices: {
@@ -41,7 +42,7 @@ defineProps({
                     </td>
                     <td>£ {{ invoice.total }}</td>
                     <td>
-                        <div class="badge bg-green-500 text-white">Completed</div>
+                        <StatusBadge :statusObject="invoice.status" />
                     </td>
                     <th>
                         <Link class="btn btn-primary btn-sm" :href="route('invoice.show', { invoice: invoice.id })">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
 use App\Models\Invoice;
+use App\Models\Status;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
@@ -18,7 +19,7 @@ class InvoiceController extends Controller
     public function index()
     {
         // Get the invoices for the logged in user.
-        $invoices = Auth::user()->invoices;
+        $invoices = Invoice::with(['status'])->where('user_id', Auth::user()->id)->get();
         
         return Inertia::render('Invoice/Index', ['invoices' =>  $invoices]);
     }
@@ -45,9 +46,12 @@ class InvoiceController extends Controller
     public function show(Invoice $invoice)
     {
         // Pre-load related invoice creator data.
-        $invoice->load('createdBy');
+        $invoice->load(['createdBy', 'status']);
 
-        return Inertia::render('Invoice/Show', ['invoice' =>  $invoice]);
+        return Inertia::render('Invoice/Show', [
+            'invoice' =>  $invoice, 
+            'statuses' => Status::all()
+        ]);
     }
 
     /**

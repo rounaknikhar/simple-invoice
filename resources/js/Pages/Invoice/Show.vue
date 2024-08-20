@@ -7,6 +7,9 @@ defineProps({
     invoice: {
         type: Object,
     },
+    statuses: {
+        type: Object,
+    },
 });
 </script>
 
@@ -23,7 +26,7 @@ defineProps({
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <button class="btn" onclick="editInvoiceModal.showModal()">Edit Invoice</button>
-                    <EditInvoiceModal :invoice="invoice" />
+                    <EditInvoiceModal :invoice="invoice" :statuses="statuses" />
                     <pre>
                 {{ invoice }}
             </pre>

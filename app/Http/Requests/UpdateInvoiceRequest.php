@@ -27,6 +27,7 @@ class UpdateInvoiceRequest extends FormRequest
             'sub_total' => 'required', 
             'vat_percentage' => 'required', 
             'total' => 'required',
+            'status' => 'required'
         ];
     }
 }

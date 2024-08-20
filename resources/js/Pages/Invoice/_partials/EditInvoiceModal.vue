@@ -6,9 +6,13 @@ const props = defineProps({
     invoice: {
         type: Object,
     },
+    statuses: {
+        type: Object,
+    },
 });
 
 const form = useForm({
+    'status': props.invoice.status.id,
     'invoice_date': props.invoice.invoice_date,
     'due_date': props.invoice.due_date,
     'company_name': props.invoice.company_name,
@@ -32,15 +36,13 @@ const form = useForm({
 function submit() {
     form.patch(route('invoice.update', { invoice: props.invoice.id }), {
         preserveScroll: true,
-        onSuccess: () => setTimeout(() => {
-            editInvoiceModal.close();
-            //$notify("Hello user!"); TODO
-        }, 500),
+        onSuccess: () =>
+            editInvoiceModal.close(),
     })
 }
 </script>
 <template>
-    <dialog id="editInvoiceModal" class="modal backdrop-blur-sm">
+    <dialog id="editInvoiceModal" class="modal">
         <div class="modal-box w-11/12 max-w-2xl">
             <form method="dialog">
                 <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
@@ -49,6 +51,26 @@ function submit() {
                 <h3 class="text-lg font-bold">Edit invoice #{{ props.invoice.id }}</h3>
                 <div class="py-4">
                     <div class="grid grid-cols-1">
+                        <label class="py-2 form-control w-full ">
+                            <div class="label">
+                                <span class="label-text">
+                                    Status
+                                    <span class="text-red-600">*</span>
+                                </span>
+                            </div>
+
+                            <select v-model="form.status" class="input input-bordered w-full">
+                                <option v-for="status in props.statuses" :value="status.id">
+                                    {{ status.name }}
+                                </option>
+                            </select>
+
+                            <!-- Error message -->
+                            <span v-if="form.errors?.status" class="label-text-alt text-red-600 my-2">
+                                {{ form.errors?.status }}
+                            </span>
+                        </label>
+
                         <label class="py-2 form-control w-full ">
                             <div class="label">
                                 <span class="label-text">

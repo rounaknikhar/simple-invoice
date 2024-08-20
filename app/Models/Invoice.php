@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -35,6 +36,7 @@ class Invoice extends Model
         'sub_total', 
         'vat_percentage', 
         'total',
+        'status',
         'user_id'
     ];
 
@@ -44,5 +46,13 @@ class Invoice extends Model
     public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * Get the status of this invoice.
+     */
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(Status::class, 'status');
     }
 }
