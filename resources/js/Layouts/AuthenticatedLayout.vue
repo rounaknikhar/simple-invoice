@@ -14,8 +14,8 @@ const showingNavigationDropdown = ref(false);
     <div>
         <!-- notification component. -->
         <notifications />
-        <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
+        <div class="min-h-screen bg-base-200">
+            <nav class="bg-white border-b border-base-200">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -32,8 +32,8 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </NavLink>
-                                <NavLink :href="route('invoice.index')" :active="route().current('invoice.index')">
-                                    invoices
+                                <NavLink :href="route('invoice.index')" :active="route().current('invoice.*')">
+                                    Invoices
                                 </NavLink>
                             </div>
                         </div>
@@ -118,7 +118,7 @@ const showingNavigationDropdown = ref(false);
             </nav>
 
             <!-- Page Heading -->
-            <header class="bg-white shadow" v-if="$slots.header">
+            <header class="bg-base-100 shadow" v-if="$slots.header">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     <slot name="header" />
                 </div>
