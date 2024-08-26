@@ -45,7 +45,8 @@ defineProps({
                         <StatusBadge :statusObject="invoice.status" />
                     </td>
                     <th>
-                        <Link class="btn btn-primary btn-sm" :href="route('invoice.show', { invoice: invoice.id })">
+                        <Link class="btn btn-primary btn-sm text-white"
+                            :href="route('invoice.show', { invoice: invoice.id })">
                         Details
                         </Link>
                     </th>
