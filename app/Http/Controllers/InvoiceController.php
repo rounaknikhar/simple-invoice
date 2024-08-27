@@ -8,6 +8,7 @@ use App\Models\Invoice;
 use App\Models\Status;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -16,14 +17,23 @@ class InvoiceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         // Get the invoices for the logged in user with status.
-        $invoices = Invoice::with(['status'])->where('user_id', Auth::user()->id)->paginate(12);
+        $invoicesQuery = Invoice::with(['status'])->where('user_id', Auth::user()->id);
+        
+        // Search by client name or invoice id.
+        if($request->search) {
+            $invoicesQuery
+                ->whereLike('client_name', '%'.$request->search.'%', caseSensitive: false)
+                ->OrWhereLike('id', '%'.$request->search.'%', caseSensitive: true);
+        } else {
+            $invoicesQuery;
+        }
+
 
         return Inertia::render('Invoice/Index', [
-            //'invoices' =>  $invoices,
-            'invoices' => Inertia::always($invoices),
+            'invoices' =>  $invoicesQuery->paginate(12),
         ]);
     }
 
