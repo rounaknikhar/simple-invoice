@@ -18,10 +18,13 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        // Get the invoices for the logged in user.
-        $invoices = Invoice::with(['status'])->where('user_id', Auth::user()->id)->get();
-        
-        return Inertia::render('Invoice/Index', ['invoices' =>  $invoices]);
+        // Get the invoices for the logged in user with status.
+        $invoices = Invoice::with(['status'])->where('user_id', Auth::user()->id)->paginate(12);
+
+        return Inertia::render('Invoice/Index', [
+            //'invoices' =>  $invoices,
+            'invoices' => Inertia::always($invoices),
+        ]);
     }
 
     /**

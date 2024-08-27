@@ -2,6 +2,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
 import InvoicesTable from '../../Components/InvoicesTable.vue';
+import Pagination from '../../Components/Pagination.vue';
 
 defineProps({
     invoices: {
@@ -43,7 +44,8 @@ defineProps({
                         <span class="hidden md:block text-white">Create invoice</span>
                         </Link>
                     </div>
-                    <InvoicesTable :invoices="invoices" />
+                    <InvoicesTable :invoices="invoices.data" />
+                    <Pagination :links="invoices.links" />
                 </div>
             </div>
         </div>
