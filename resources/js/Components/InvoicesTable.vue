@@ -1,16 +1,22 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
 import StatusBadge from './StatusBadge.vue';
+import moment from 'moment';
 
 defineProps({
     invoices: {
         type: Object,
     },
 });
+
+const formattedDate = (date) => {
+    return moment(String(date)).format('MM/DD/YYYY');
+};
+
 </script>
 
 <template>
-    <div class="overflow-x-auto">
+    <div class="overflow-x-auto" v-auto-animate>
         <table class="table">
             <!-- head -->
             <thead>
@@ -25,7 +31,6 @@ defineProps({
             </thead>
             <tbody> <!-- row 1 -->
                 <tr v-for="invoice in invoices" v-if="invoices.length">
-
                     <td>
                         {{ invoice.id }}
                     </td>
@@ -38,7 +43,7 @@ defineProps({
                         </div>
                     </td>
                     <td>
-                        {{ invoice.due_date }}
+                        {{ formattedDate(invoice.due_date) }}
                     </td>
                     <td>£ {{ invoice.total }}</td>
                     <td>

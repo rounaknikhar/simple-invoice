@@ -15,7 +15,7 @@ defineProps({
                 <div v-if="link.url === null" :key="key"
                     class="mr-1 mb-1 px-4 py-3 text-sm leading-4 border rounded bg-base text-gray-400 text-disabled"
                     v-html="link.label" />
-                <Link v-else
+                <Link v-else v-auto-animate
                     class="mr-1 mb-1 px-4 py-3 text-sm leading-4 border rounded hover:border-primary hover:text-dark"
                     :class="{ 'bg-primary text-white': link.active }" :href="link.url" v-html="link.label" />
             </template>

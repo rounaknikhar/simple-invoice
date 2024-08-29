@@ -8,13 +8,13 @@ defineProps({
 </script>
 
 <template>
-    <div class="badge bg-green-500 text-white" v-if="statusObject.id === 2">
+    <div class="badge bg-success text-white shadow-lg" v-if="statusObject.id === 2">
         {{ statusObject.name }}
     </div>
-    <div class="badge bg-light text-secondary" v-else-if="statusObject.id === 3">
+    <div class="badge bg-light text-error shadow-lg" v-else-if="statusObject.id === 3">
         {{ statusObject.name }}
     </div>
-    <div class="badge bg-accent text-white" v-else>
+    <div class="badge bg-accent text-white shadow-lg" v-else>
         {{ statusObject.name }}
     </div>
 </template>
