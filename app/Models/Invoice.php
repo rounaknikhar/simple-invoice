@@ -4,9 +4,11 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Status;
+use App\Models\Item;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Invoice extends Model
 {
@@ -55,5 +57,13 @@ class Invoice extends Model
     public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class, 'status');
+    }
+
+    /**
+     * Get the items for this invoice.
+     */
+    public function items(): HasMany
+    {
+        return $this->hasMany(Item::class);
     }
 }

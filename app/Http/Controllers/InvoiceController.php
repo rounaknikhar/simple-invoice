@@ -59,7 +59,7 @@ class InvoiceController extends Controller
     public function show(Invoice $invoice)
     {
         // Pre-load related invoice creator data.
-        $invoice->load(['createdBy', 'status']);
+        $invoice->load(['createdBy', 'status', 'items']);
 
         return Inertia::render('Invoice/Show', [
             'invoice' =>  $invoice, 
