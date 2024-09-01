@@ -56,7 +56,6 @@ function submit() {
                             <div class="label">
                                 <span class="label-text">
                                     Status
-                                    <span class="text-red-600">*</span>
                                 </span>
                             </div>
 
