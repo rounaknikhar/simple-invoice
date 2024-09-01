@@ -25,11 +25,12 @@ class InvoiceController extends Controller
         if($request->search) {
             $invoicesQuery
                 ->whereLike('client_name', '%'.$request->search.'%', caseSensitive: false)
-                ->OrWhereLike('id', '%'.$request->search.'%', caseSensitive: true);
+                ->OrWhereLike('id', '%'.$request->search.'%');
         } else {
             $invoicesQuery;
         }
 
+        $invoicesQuery->orderBy('id', 'desc');
 
         return Inertia::render('Invoice/Index', [
             'invoices' =>  $invoicesQuery->paginate(12),
@@ -51,11 +52,18 @@ class InvoiceController extends Controller
     {
         // Retrieve the validated input data.
         $validated = $request->validated();
-        $validated['user_id'] = 1;
+
+        // Defaults to status pending.
+        $validated['status'] = 1;
+
+        // Defaults to logged in user.
+        $validated['user_id'] = Auth::user()->id;
+
         // Store validated data.
-        Invoice::create($validated);
+        $invoice = Invoice::create($validated);
         
-        return Redirect::route('invoice.index');
+        // Redirects to newly created invoice page.
+        return Redirect::route('invoice.show', ['invoice' => $invoice->id]);
     }
 
     /**
@@ -79,9 +87,11 @@ class InvoiceController extends Controller
     {
         // Retrieve the validated input data.
         $validated = $request->validated();
+
         // Update validated data.
         $invoice->update($validated);
-        
+
+        // Redirects to the updated invoice page.
         return Redirect::route('invoice.show', ['invoice' => $invoice->id]);
     }
 
