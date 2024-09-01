@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateInvoiceRequest extends FormRequest
+class InvoiceRequest extends FormRequest
 {
     public function rules(): array
     {
@@ -27,7 +27,6 @@ class UpdateInvoiceRequest extends FormRequest
             'sub_total' => 'required', 
             'vat_percentage' => 'required', 
             'total' => 'required',
-            'status' => 'required',
             'note' => '',
         ];
     }

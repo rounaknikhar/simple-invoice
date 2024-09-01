@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('invoices', function (Blueprint $table) {
-            $table->longText('note')->after('total')->nullable();
-            $table->string('status')->after('total')->default(1);
+            $table->longText('note')->nullable()->after('total');
+            $table->tinyInteger('status')->default(1)->after('total');
         });
     }
 

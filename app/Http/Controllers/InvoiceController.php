@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreInvoiceRequest;
-use App\Http\Requests\UpdateInvoiceRequest;
+use App\Http\Requests\InvoiceRequest;
 use App\Models\Invoice;
 use App\Models\Status;
 use Illuminate\Support\Facades\Auth;
@@ -48,9 +47,15 @@ class InvoiceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreInvoiceRequest $request)
+    public function store(InvoiceRequest $request)
     {
-        //
+        // Retrieve the validated input data.
+        $validated = $request->validated();
+        $validated['user_id'] = 1;
+        // Store validated data.
+        Invoice::create($validated);
+        
+        return Redirect::route('invoice.index');
     }
 
     /**
@@ -70,7 +75,7 @@ class InvoiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateInvoiceRequest $request, Invoice $invoice): RedirectResponse
+    public function update(InvoiceRequest $request, Invoice $invoice): RedirectResponse
     {
         // Retrieve the validated input data.
         $validated = $request->validated();
