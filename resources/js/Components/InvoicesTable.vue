@@ -1,6 +1,6 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
-import StatusBadge from './StatusBadge.vue';
+import StatusBadge from '@/Components/StatusBadge.vue';
 import moment from 'moment';
 
 defineProps({
