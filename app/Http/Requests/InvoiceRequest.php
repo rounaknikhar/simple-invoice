@@ -24,11 +24,9 @@ class InvoiceRequest extends FormRequest
             'client_city' => 'required', 
             'client_county' => '', 
             'client_postcode' => 'required',
-            'sub_total' => 'required', 
-            'vat_percentage' => 'required', 
-            'total' => 'required',
             'status' => '',
             'note' => '',
+            'vat_percentage' => ''
         ];
     }
 }

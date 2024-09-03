@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\InvoiceRequest;
+use App\Http\Requests\ProductRequest;
 use App\Models\Invoice;
+use App\Models\Product;
 use App\Models\Status;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
@@ -42,7 +44,7 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Invoice/Create');
+        return Inertia::render('Invoice/Create/Step1');
     }
 
     /**
@@ -63,7 +65,58 @@ class InvoiceController extends Controller
         $invoice = Invoice::create($validated);
         
         // Redirects to newly created invoice page.
-        return Redirect::route('invoice.show', ['invoice' => $invoice->id]);
+        return Redirect::route('invoice.create.show.add-products', ['invoice' => $invoice->id]);
+    }
+
+    /**
+     * Show add products page from step 2 of the create invoice form.
+     */
+    public function addProducts(Invoice $invoice)
+    {
+        $invoice->load(['createdBy', 'status', 'products']);
+        
+        return Inertia::render('Invoice/Create/Step2', ['invoice' => $invoice]);
+    }
+
+    /**
+     * Store the products for the newly created invoice
+     */
+    public function storeProducts(ProductRequest $request, Invoice $invoice)
+    {
+        $invoice->load(['createdBy', 'status', 'products']);
+
+        // Retrieve the validated input data.
+        $validated = $request->validated();
+
+        // Defaults to newly created invoice id.
+        $validated['invoice_id'] = $invoice->id;
+
+        // Store validated data.
+        $invoice->products()->firstOrCreate($validated);
+
+        $products = $invoice->products()->get();
+        
+        // Total charge.
+        $totalChargeArray = [];
+        // Grand total.
+        $grandTotal = 0;
+        
+        foreach ($products as $product) {
+            array_push($totalChargeArray, $product->total_charge);
+        }
+
+        $sumOfTotalCharge = array_sum($totalChargeArray);
+
+        $vatPercentage = $invoice->vat_percentage;
+        
+        $grandTotal = $sumOfTotalCharge + ($vatPercentage / 100 ) * $sumOfTotalCharge;
+
+        $invoice->find($invoice->id)->update([
+            'sub_total' => $sumOfTotalCharge ,
+            'total' => $grandTotal
+        ]);
+        
+        return Redirect::route('invoice.create.show.add-products', ['invoice' => $invoice->id]);
     }
 
     /**

@@ -26,6 +26,11 @@ Route::middleware('auth')->group(function () {
 
     // Invoices
     Route::resource('invoice', InvoiceController::class);
+
+    // Create invoice: Show the add product route.
+    Route::get('/invoice/create/{invoice}/add-products', [InvoiceController::class, 'addProducts'])->name('invoice.create.show.add-products');
+    // Create invoice: store added product.
+    Route::post('/invoice/create/{invoice}/add-products', [InvoiceController::class, 'storeProducts'])->name('invoice.create.show.store-products');
 });
 
 require __DIR__.'/auth.php';

@@ -36,9 +36,9 @@ return new class extends Migration
             $table->string('client_city');
             $table->string('client_county')->nullable();
             $table->string('client_postcode');
-            $table->decimal('sub_total', total: 8, places: 2);
-            $table->integer('vat_percentage');
-            $table->decimal('total', total: 8, places: 2);
+            $table->decimal('sub_total', total: 8, places: 2)->nullable();
+            $table->integer('vat_percentage')->nullable();
+            $table->decimal('total', total: 8, places: 2)->nullable();
             $table->foreignIdFor(User::class);
             $table->timestamps();
         });

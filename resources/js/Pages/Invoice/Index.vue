@@ -16,7 +16,7 @@ const form = useForm({
 });
 
 function search() {
-    form.get(route("invoice.index"), {});
+    form.get(route("invoice.index"));
 }
 </script>
 
