@@ -14,9 +14,9 @@ class ItemFactory extends Factory
     {
         return [
             'name' => fake()->sentence(), 
-            'amount_value' => fake()->randomDigit(1), 
-            'amount_type' => 'qty', 
-            'amount_cost' => fake()->randomFloat(1, 10, 100),
+            'amount' => fake()->randomDigit(1), 
+            'unit' => 'qty', 
+            'total_charge' => fake()->randomFloat(1, 10, 100),
             'invoice_id' => Invoice::first()->id,
         ];
     }

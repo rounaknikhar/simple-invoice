@@ -15,9 +15,9 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->decimal('amount_value', total: 8, places: 2)->nullable();
-            $table->string('amount_type')->nullable();
-            $table->decimal('amount_cost', total: 8, places: 2);
+            $table->decimal('amount', total: 8, places: 2)->nullable();
+            $table->string('unit')->nullable();
+            $table->decimal('total_charge', total: 8, places: 2);
             $table->foreignIdFor(Invoice::class);
             $table->timestamps();
         });

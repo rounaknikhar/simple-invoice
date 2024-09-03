@@ -18,9 +18,9 @@ class Item extends Model
      */
     protected $fillable = [
         'name', 
-        'amount_value', 
-        'amount_type', 
-        'amount_cost',
+        'amount', 
+        'unit', 
+        'total_charge',
         'invoice_id'
     ];
 
