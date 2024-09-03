@@ -148,7 +148,7 @@ const formattedDate = (date) => {
                             </div>
                         </div>
                         <!-- Invoiced products -->
-                        <div v-if="invoice.items.length > 0">
+                        <div v-if="invoice.products.length > 0">
                             <span class="font-semibold text-lg border-l-2 border-primary p-1 pl-3 mt-4">
                                 Invoiced products
                             </span>
@@ -164,11 +164,11 @@ const formattedDate = (date) => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="item in invoice.items" :key="item.id">
-                                            <td>{{ item.name }}</td>
-                                            <td>{{ item.amount }}</td>
-                                            <td>{{ item.unit }}</td>
-                                            <td>{{ item.total_charge }}</td>
+                                        <tr v-for="product in invoice.products" :key="product.id">
+                                            <td>{{ product.name }}</td>
+                                            <td>{{ product.amount }}</td>
+                                            <td>{{ product.unit }}</td>
+                                            <td>{{ product.total_charge }}</td>
                                         </tr>
                                         <tr>
                                             <td class="font-semibold text-black">Sub total</td>

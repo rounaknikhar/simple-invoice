@@ -6,9 +6,9 @@ use App\Models\Invoice;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Item>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
  */
-class ItemFactory extends Factory
+class ProductFactory extends Factory
 {
     public function definition(): array
     {

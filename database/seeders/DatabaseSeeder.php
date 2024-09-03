@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Invoice;
-use App\Models\Item;
+use App\Models\Product;
 use App\Models\User;
 use App\Models\Status;
 use Illuminate\Database\Seeder;
@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // Seed items.
-        Item::factory(5)->create();
+        // Seed products.
+        Product::factory(5)->create();
     }
 }
