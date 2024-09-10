@@ -63,6 +63,10 @@ class InvoiceController extends Controller
 
         // Store validated data.
         $invoice = Invoice::create($validated);
+
+        $products = $invoice->products()->get();
+    
+        $this->calculateTotal($products, $invoice);
         
         // Redirects to newly created invoice page.
         return Redirect::route('invoice.show.add-products', ['invoice' => $invoice->id]);
@@ -74,6 +78,11 @@ class InvoiceController extends Controller
     public function addProducts(Invoice $invoice)
     {
         $invoice->load(['createdBy', 'status', 'products']);
+        
+        $products = $invoice->products()->get();
+    
+        $this->calculateTotal($products, $invoice);
+        
         return Inertia::render('Invoice/AddProducts', ['invoice' => $invoice]);
     }
 
@@ -95,6 +104,18 @@ class InvoiceController extends Controller
 
         $products = $invoice->products()->get();
         
+        $this->calculateTotal($products, $invoice);
+        
+        return back()->withInput();
+    }
+
+    public function calculateTotal($products, $invoice)
+    {
+        // TODO
+        // move all the calculations to frontend side.
+        // only save total amount once it's all been
+        // calculated and sent from frontend.
+
         // Total charge.
         $totalChargeArray = [];
         // Grand total.
@@ -114,8 +135,6 @@ class InvoiceController extends Controller
             'sub_total' => $sumOfTotalCharge ,
             'total' => $grandTotal
         ]);
-        
-        return Redirect::route('invoice.show.add-products', ['invoice' => $invoice->id]);
     }
 
     /**
@@ -126,6 +145,10 @@ class InvoiceController extends Controller
         // Pre-load related invoice creator data.
         $invoice->load(['createdBy', 'status', 'products']);
 
+        $products = $invoice->products()->get();
+    
+        $this->calculateTotal($products, $invoice);
+        
         return Inertia::render('Invoice/Show', [
             'invoice' =>  $invoice, 
             'statuses' => Status::all()
@@ -142,6 +165,10 @@ class InvoiceController extends Controller
 
         // Update validated data.
         $invoice->update($validated);
+
+        $products = $invoice->products()->get();
+    
+        $this->calculateTotal($products, $invoice);
 
         // Redirects to the updated invoice page.
         return Redirect::route('invoice.show', ['invoice' => $invoice->id]);
