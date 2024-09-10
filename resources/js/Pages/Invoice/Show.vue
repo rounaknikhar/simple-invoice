@@ -1,5 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import AddProductsModal from "./_partials/AddProductsModal.vue";
 import { Head } from "@inertiajs/vue3";
 import EditInvoiceModal from "./_partials/EditInvoiceModal.vue";
 import moment from "moment";
@@ -215,12 +216,25 @@ const formattedDate = (date) => {
                             </div>
                         </div>
                         <!-- Invoiced products -->
-                        <div v-if="invoice.products.length > 0">
-                            <span
-                                class="font-semibold text-lg border-l-2 border-primary p-1 pl-3 mt-4"
-                            >
-                                Invoiced products
+                        <span
+                            class="font-semibold text-lg border-l-2 border-primary p-1 pl-3 mt-4"
+                        >
+                            Invoiced products
+                        </span>
+                        <div class="flex md:justify-between justify-end py-4">
+                            <span v-if="invoice.products.length == 0">
+                                Please add your first product
                             </span>
+                            <button
+                                class="btn btn-sm btn-primary text-white rounded shadow-xl"
+                                onclick="productModal.showModal()"
+                            >
+                                <span>Add product</span>
+                            </button>
+
+                            <AddProductsModal :invoice="invoice" />
+                        </div>
+                        <div v-if="invoice.products.length > 0">
                             <div class="overflow-x-auto py-4">
                                 <table class="table">
                                     <!-- head -->

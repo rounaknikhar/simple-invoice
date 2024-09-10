@@ -18,8 +18,6 @@ defineProps({
             </h2>
         </template>
 
-        <AddProductsModal :invoice="invoice" />
-
         <div class="pb-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex md:justify-between justify-end p-12">
@@ -32,6 +30,8 @@ defineProps({
                     >
                         <span>Add product</span>
                     </button>
+
+                    <AddProductsModal :invoice="invoice" />
                 </div>
 
                 <div>
