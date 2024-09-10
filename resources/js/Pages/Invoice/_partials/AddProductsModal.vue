@@ -1,5 +1,9 @@
 <script setup>
-import { useForm, Link } from "@inertiajs/vue3";
+import { useForm, Link, usePage } from "@inertiajs/vue3";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
+
+const page = usePage();
 
 const props = defineProps({
     invoice: Object,
@@ -20,7 +24,10 @@ const submit = () => {
         {
             preserveScroll: true,
             preserveState: false,
-            onSuccess: () => productModal.close(),
+            onSuccess: () => {
+                productModal.close();
+                toast.success(page.props.flash.message);
+            },
         }
     );
 };

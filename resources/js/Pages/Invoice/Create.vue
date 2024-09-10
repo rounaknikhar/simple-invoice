@@ -1,6 +1,10 @@
 <script setup>
-import { Head, useForm, Link } from "@inertiajs/vue3";
+import { Head, useForm, Link, usePage } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
+
+const page = usePage();
 
 const form = useForm({
     status: "",
@@ -26,7 +30,7 @@ const form = useForm({
 function submit() {
     form.post(route("invoice.store"), {
         preserveScroll: true,
-        //onSuccess: () => ,
+        onSuccess: () => toast.success(page.props.flash.message),
     });
 }
 </script>

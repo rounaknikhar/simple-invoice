@@ -5,7 +5,7 @@ import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy";
-import Notifications from "@kyvg/vue3-notification";
+import Vue3Toastify from "vue3-toastify";
 import { autoAnimatePlugin } from "@formkit/auto-animate/vue";
 
 const appName = import.meta.env.VITE_APP_NAME || "Laravel";
@@ -21,11 +21,13 @@ createInertiaApp({
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
-            .use(Notifications)
+            .use(Vue3Toastify, {
+                autoClose: 3000,
+            })
             .use(autoAnimatePlugin)
             .mount(el);
     },
     progress: {
-        color: "#4B5563",
+        color: "#5e81ac",
     },
 });

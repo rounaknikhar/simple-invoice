@@ -2,6 +2,7 @@
 import { Head, Link } from "@inertiajs/vue3";
 import AddProductsModal from "./_partials/AddProductsModal.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import ProductsTable from "@/Components/ProductsTable.vue";
 
 defineProps({
     invoice: Object,
@@ -42,79 +43,18 @@ defineProps({
                         >
                             Invoiced products
                         </span>
-                        <div class="overflow-x-auto py-4">
-                            <table class="table">
-                                <!-- head -->
-                                <thead>
-                                    <tr>
-                                        <th class="font-semibold text-black">
-                                            Product
-                                        </th>
-                                        <th class="font-semibold text-black">
-                                            Amount
-                                        </th>
-                                        <th class="font-semibold text-black">
-                                            Unit
-                                        </th>
-                                        <th class="font-semibold text-black">
-                                            Total charge
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr
-                                        v-for="product in invoice.products"
-                                        :key="product.id"
-                                    >
-                                        <td>{{ product.name }}</td>
-                                        <td>{{ product.amount }}</td>
-                                        <td>{{ product.unit }}</td>
-                                        <td>{{ product.total_charge }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-semibold text-black">
-                                            Sub total
-                                        </td>
-                                        <th></th>
-                                        <th></th>
-                                        <th class="font-semibold text-black">
-                                            {{ invoice.sub_total }}
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-semibold text-black">
-                                            VAT %
-                                        </td>
-                                        <th></th>
-                                        <th></th>
-                                        <th class="font-semibold text-black">
-                                            {{ invoice.vat_percentage }}%
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-semibold text-black">
-                                            Grand total
-                                        </td>
-                                        <th></th>
-                                        <th></th>
-                                        <th class="font-semibold text-black">
-                                            {{ invoice.total }}
-                                        </th>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="flex justify-end">
-                                <Link
-                                    class="btn btn-primary mt-4 w-full md:w-56 text-white"
-                                    :href="
-                                        route('invoice.show', {
-                                            invoice: invoice.id,
-                                        })
-                                    "
-                                >
-                                    Finish
-                                </Link>
-                            </div>
+                        <ProductsTable :invoice="invoice" />
+                        <div class="flex justify-end">
+                            <Link
+                                class="btn btn-primary mt-4 w-full md:w-56 text-white"
+                                :href="
+                                    route('invoice.show', {
+                                        invoice: invoice.id,
+                                    })
+                                "
+                            >
+                                Finish
+                            </Link>
                         </div>
                     </div>
                 </div>

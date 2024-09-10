@@ -5,6 +5,7 @@ import { Head } from "@inertiajs/vue3";
 import EditInvoiceModal from "./_partials/EditInvoiceModal.vue";
 import moment from "moment";
 import StatusBadge from "@/Components/StatusBadge.vue";
+import ProductsTable from "@/Components/ProductsTable.vue";
 
 defineProps({
     invoice: {
@@ -234,90 +235,7 @@ const formattedDate = (date) => {
 
                             <AddProductsModal :invoice="invoice" />
                         </div>
-                        <div v-if="invoice.products.length > 0">
-                            <div class="overflow-x-auto py-4">
-                                <table class="table">
-                                    <!-- head -->
-                                    <thead>
-                                        <tr>
-                                            <th
-                                                class="font-semibold text-black"
-                                            >
-                                                Product
-                                            </th>
-                                            <th
-                                                class="font-semibold text-black"
-                                            >
-                                                Amount
-                                            </th>
-                                            <th
-                                                class="font-semibold text-black"
-                                            >
-                                                Unit
-                                            </th>
-                                            <th
-                                                class="font-semibold text-black"
-                                            >
-                                                Total charge
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr
-                                            v-for="product in invoice.products"
-                                            :key="product.id"
-                                        >
-                                            <td>{{ product.name }}</td>
-                                            <td>{{ product.amount }}</td>
-                                            <td>{{ product.unit }}</td>
-                                            <td>{{ product.total_charge }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td
-                                                class="font-semibold text-black"
-                                            >
-                                                Sub total
-                                            </td>
-                                            <th></th>
-                                            <th></th>
-                                            <th
-                                                class="font-semibold text-black"
-                                            >
-                                                {{ invoice.sub_total }}
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <td
-                                                class="font-semibold text-black"
-                                            >
-                                                VAT %
-                                            </td>
-                                            <th></th>
-                                            <th></th>
-                                            <th
-                                                class="font-semibold text-black"
-                                            >
-                                                {{ invoice.vat_percentage }}%
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <td
-                                                class="font-semibold text-black"
-                                            >
-                                                Grand total
-                                            </td>
-                                            <th></th>
-                                            <th></th>
-                                            <th
-                                                class="font-semibold text-black"
-                                            >
-                                                {{ invoice.total }}
-                                            </th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                        <ProductsTable :invoice="invoice" />
                     </div>
                 </div>
             </div>

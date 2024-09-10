@@ -1,7 +1,7 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
-import StatusBadge from '@/Components/StatusBadge.vue';
-import moment from 'moment';
+import { Link } from "@inertiajs/vue3";
+import StatusBadge from "@/Components/StatusBadge.vue";
+import moment from "moment";
 
 defineProps({
     invoices: {
@@ -10,9 +10,8 @@ defineProps({
 });
 
 const formattedDate = (date) => {
-    return moment(String(date)).format('MM/DD/YYYY');
+    return moment(String(date)).format("MM/DD/YYYY");
 };
-
 </script>
 
 <template>
@@ -29,7 +28,8 @@ const formattedDate = (date) => {
                     <th></th>
                 </tr>
             </thead>
-            <tbody> <!-- row 1 -->
+            <tbody>
+                <!-- row 1 -->
                 <tr v-for="invoice in invoices" v-if="invoices.length">
                     <td>
                         {{ invoice.id }}
@@ -37,8 +37,12 @@ const formattedDate = (date) => {
                     <td>
                         <div class="flex items-center gap-3">
                             <div>
-                                <div class="font-bold">{{ invoice.client_name }}</div>
-                                <div class="text-sm opacity-50">{{ invoice.client_country }}</div>
+                                <div class="font-bold">
+                                    {{ invoice.client_name }}
+                                </div>
+                                <div class="text-sm opacity-50">
+                                    {{ invoice.client_country }}
+                                </div>
                             </div>
                         </div>
                     </td>
@@ -50,16 +54,23 @@ const formattedDate = (date) => {
                         <StatusBadge :statusObject="invoice.status" />
                     </td>
                     <th>
-                        <Link class="btn btn-primary btn-sm text-white"
-                            :href="route('invoice.show', { invoice: invoice.id })">
-                        Details
+                        <Link
+                            class="btn btn-primary btn-sm text-white"
+                            :href="
+                                route('invoice.show', { invoice: invoice.id })
+                            "
+                        >
+                            Details
                         </Link>
                     </th>
                 </tr>
                 <tr v-else>
                     <td colspan="6">
-                        <p class="text-center text-sm">You don't have any invoice!
-                            <Link :href="route('invoice.create')">Create one</Link>
+                        <p class="text-center text-sm">
+                            You don't have any invoice!
+                            <Link :href="route('invoice.create')"
+                                >Create one</Link
+                            >
                         </p>
                     </td>
                 </tr>

@@ -87,6 +87,18 @@ class InvoiceController extends Controller
     }
 
     /**
+     * Remove the specified resource from storage.
+     */
+    public function deleteProduct(Invoice $invoice, Product $product)
+    {
+        $productFound = $invoice->products()->find($product)->first();
+        
+        $productFound->delete();
+        
+        return back()->with('message', 'Product successfully deleted!');
+    }
+
+    /**
      * Store the products for the newly created invoice
      */
     public function storeProducts(ProductRequest $request, Invoice $invoice)
@@ -106,7 +118,7 @@ class InvoiceController extends Controller
         
         $this->calculateTotal($products, $invoice);
         
-        return back()->withInput();
+        return back()->with('message', 'Product successfully added!');
     }
 
     public function calculateTotal($products, $invoice)
@@ -171,7 +183,7 @@ class InvoiceController extends Controller
         $this->calculateTotal($products, $invoice);
 
         // Redirects to the updated invoice page.
-        return Redirect::route('invoice.show', ['invoice' => $invoice->id]);
+        return back()->with('message', 'Invoice successfully updated!');
     }
 
     /**
@@ -179,6 +191,8 @@ class InvoiceController extends Controller
      */
     public function destroy(Invoice $invoice)
     {
-        //
+        $invoice->delete();
+
+        return back()->with('message', 'Invoice successfully deleted!');
     }
 }

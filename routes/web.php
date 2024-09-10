@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/invoice/{invoice}/add-products', [InvoiceController::class, 'addProducts'])->name('invoice.show.add-products');
     // Store products.
     Route::post('/invoice/{invoice}/add-products', [InvoiceController::class, 'storeProducts'])->name('invoice.store.products');
+    // Delete product.
+    Route::delete('/invoice/{invoice}/delete-product/{product}', [InvoiceController::class, 'deleteProduct'])->name('invoice.product.delete');
 });
 
 require __DIR__.'/auth.php';

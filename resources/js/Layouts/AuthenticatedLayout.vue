@@ -1,19 +1,19 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import NavLink from "@/Components/NavLink.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, usePage } from "@inertiajs/vue3";
+
+const page = usePage();
 
 const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
     <div>
-        <!-- notification component. -->
-        <notifications />
         <div class="min-h-screen bg-base-200">
             <nav class="bg-white border-b border-base-200">
                 <!-- Primary Navigation Menu -->

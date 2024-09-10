@@ -21,7 +21,8 @@
     },
     "dependencies": {
         "@formkit/auto-animate": "^0.8.2",
-        "@kyvg/vue3-notification": "^3.2.1",
-        "moment": "^2.30.1"
+        "@kyvg/vue3-notification": "^3.3.0",
+        "moment": "^2.30.1",
+        "vue3-toastify": "^0.2.3"
     }
 }

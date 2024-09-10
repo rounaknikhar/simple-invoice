@@ -1,6 +1,9 @@
 <script setup>
-import { useForm } from "@inertiajs/vue3";
-import { notify } from "@kyvg/vue3-notification";
+import { useForm, usePage } from "@inertiajs/vue3";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
+
+const page = usePage();
 
 const props = defineProps({
     invoice: {
@@ -37,7 +40,10 @@ const form = useForm({
 function submit() {
     form.patch(route("invoice.update", { invoice: props.invoice.id }), {
         preserveScroll: true,
-        onSuccess: () => editInvoiceModal.close(),
+        onSuccess: () => {
+            toast.success(page.props.flash.message);
+            editInvoiceModal.close();
+        },
     });
 }
 </script>
