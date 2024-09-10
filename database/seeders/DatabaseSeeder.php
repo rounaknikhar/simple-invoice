@@ -46,8 +46,5 @@ class DatabaseSeeder extends Seeder
                 "name" => $status['name'],
             ]);
         }
-
-        // Seed products.
-        Product::factory(5)->create();
     }
 }
