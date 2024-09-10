@@ -44,7 +44,7 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Invoice/Create/Step1');
+        return Inertia::render('Invoice/Create');
     }
 
     /**
@@ -65,17 +65,16 @@ class InvoiceController extends Controller
         $invoice = Invoice::create($validated);
         
         // Redirects to newly created invoice page.
-        return Redirect::route('invoice.create.show.add-products', ['invoice' => $invoice->id]);
+        return Redirect::route('invoice.show.add-products', ['invoice' => $invoice->id]);
     }
 
     /**
-     * Show add products page from step 2 of the create invoice form.
+     * Show add products page.
      */
     public function addProducts(Invoice $invoice)
     {
         $invoice->load(['createdBy', 'status', 'products']);
-        
-        return Inertia::render('Invoice/Create/Step2', ['invoice' => $invoice]);
+        return Inertia::render('Invoice/AddProducts', ['invoice' => $invoice]);
     }
 
     /**
@@ -116,7 +115,7 @@ class InvoiceController extends Controller
             'total' => $grandTotal
         ]);
         
-        return Redirect::route('invoice.create.show.add-products', ['invoice' => $invoice->id]);
+        return Redirect::route('invoice.show.add-products', ['invoice' => $invoice->id]);
     }
 
     /**
