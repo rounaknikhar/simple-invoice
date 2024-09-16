@@ -12,6 +12,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\App;
 
 class InvoiceController extends Controller
 {
@@ -194,5 +196,18 @@ class InvoiceController extends Controller
         $invoice->delete();
 
         return back()->with('message', 'Invoice successfully deleted!');
+    }
+
+    /**
+     * Generate invoice PDF
+     */
+    public function generatePDF(Invoice $invoice)
+    {
+        // Pre-load related invoice creator data.
+        $invoice->load(['createdBy', 'status', 'products']);
+        
+        $pdf = Pdf::loadView('pdf.invoice', ['invoice' => $invoice]);
+        $pdf->setOption(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+        return $pdf->stream('invoice#'.$invoice->id.'.pdf');
     }
 }

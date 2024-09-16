@@ -33,6 +33,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/invoice/{invoice}/add-products', [InvoiceController::class, 'storeProducts'])->name('invoice.store.products');
     // Delete product.
     Route::delete('/invoice/{invoice}/delete-product/{product}', [InvoiceController::class, 'deleteProduct'])->name('invoice.product.delete');
+
+    // Generating PDF routes
+    Route::get('/invoice/{invoice}/generate-pdf', [InvoiceController::class, 'generatePDF'])->name('invoice.generate.pdf');
 });
 
 require __DIR__.'/auth.php';

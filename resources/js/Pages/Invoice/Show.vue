@@ -49,8 +49,14 @@ const formattedDate = (date) => {
                         }}</span>
                     </h1>
                     <div>
-                        <button
+                        <a
                             class="btn btn-sm btn-accent rounded shadow-xl text-white"
+                            :href="
+                                route('invoice.generate.pdf', {
+                                    invoice: invoice.id,
+                                })
+                            "
+                            target="_blank"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +72,7 @@ const formattedDate = (date) => {
                                 />
                             </svg>
                             <span class="hidden md:block">Generate</span> PDF
-                        </button>
+                        </a>
                         <button
                             class="btn btn-sm btn-neutral rounded shadow-xl ml-1"
                             onclick="editInvoiceModal.showModal()"
