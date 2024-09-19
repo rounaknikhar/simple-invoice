@@ -3,6 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import AddProductsModal from "./_partials/AddProductsModal.vue";
 import { Head } from "@inertiajs/vue3";
 import EditInvoiceModal from "./_partials/EditInvoiceModal.vue";
+import DeleteInvoiceModal from "./_partials/DeleteInvoiceModal.vue";
 import moment from "moment";
 import StatusBadge from "@/Components/StatusBadge.vue";
 import ProductsTable from "@/Components/ProductsTable.vue";
@@ -91,6 +92,7 @@ const formattedDate = (date) => {
                         </button>
                         <button
                             class="btn btn-sm btn-error rounded shadow-xl text-white ml-1"
+                            onclick="deleteInvoiceModal.showModal()"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -106,6 +108,7 @@ const formattedDate = (date) => {
                             </svg>
                             <span class="hidden md:block">Delete</span>
                         </button>
+                        <DeleteInvoiceModal :invoice="invoice" />
                     </div>
                 </div>
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">

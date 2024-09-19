@@ -473,7 +473,7 @@ function submit() {
                             </span>
                         </label>
 
-                        <label class="py-2 form-control w-full">
+                        <label class="py-2 form-control w-full hidden">
                             <div class="label">
                                 <span class="label-text">
                                     Sub total
@@ -530,7 +530,7 @@ function submit() {
                             </span>
                         </label>
 
-                        <label class="py-2 form-control w-full">
+                        <label class="py-2 form-control w-full hidden">
                             <div class="label">
                                 <span class="label-text">
                                     Total

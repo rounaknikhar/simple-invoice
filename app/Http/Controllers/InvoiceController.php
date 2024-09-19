@@ -71,7 +71,7 @@ class InvoiceController extends Controller
         $this->calculateTotal($products, $invoice);
         
         // Redirects to newly created invoice page.
-        return Redirect::route('invoice.show.add-products', ['invoice' => $invoice->id]);
+        return Redirect::route('invoice.show.add-products', ['invoice' => $invoice->id])->with('message','Details successfully added');
     }
 
     /**
@@ -195,7 +195,7 @@ class InvoiceController extends Controller
     {
         $invoice->delete();
 
-        return back()->with('message', 'Invoice successfully deleted!');
+        return Redirect::route('invoice.index')->with('message', 'Invoice successfully deleted!');
     }
 
     /**
