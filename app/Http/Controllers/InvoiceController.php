@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\UserHasInvoiceAccess;
 use App\Http\Requests\InvoiceRequest;
 use App\Http\Requests\ProductRequest;
 use App\Models\Invoice;
@@ -13,10 +14,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\App;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class InvoiceController extends Controller
+class InvoiceController extends Controller  implements HasMiddleware
 {
+    /**
+     * Get the middleware that should be assigned to the controller.
+     */
+    public static function middleware(): array
+    {
+        return [
+            'auth',
+            new Middleware(UserHasInvoiceAccess::class, except: ['index', 'create', 'addProducts', 'store']),
+        ];
+    }
+    
     /**
      * Display a listing of the resource.
      */

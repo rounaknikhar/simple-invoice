@@ -54,4 +54,18 @@ class User extends Authenticatable
     {
         return $this->hasMany(Invoice::class);
     }
+
+    /**
+     * Check if user has permission to access an invoice.
+     */
+    public function hasAccessTo($invoiceId): bool
+    {
+        $invoice = Invoice::find($invoiceId);
+
+        if ($invoice->user_id == $this->id) {
+            return true;
+        }
+        
+        return false;
+    }
 }
