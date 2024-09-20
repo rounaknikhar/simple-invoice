@@ -207,7 +207,10 @@ class InvoiceController extends Controller
         $invoice->load(['createdBy', 'status', 'products']);
         
         $pdf = Pdf::loadView('pdf.invoice', ['invoice' => $invoice]);
-        $pdf->setOption(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+        $pdf->setOption([
+            'dpi' => 150, 
+            'defaultFont' => 'sans-serif'
+        ]);
         return $pdf->stream('invoice#'.$invoice->id.'.pdf');
     }
 }
