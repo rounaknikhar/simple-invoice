@@ -38,3 +38,7 @@ alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
 ```
 
 And at last, it's not a perfectly written project. As I have rushed it to showcase something on my portfolio. Will be deploying it live in the near future.
+
+## Tech
+
+Docker, Laravel 11 (eloquent), inertia.js, Vue 3, mySQL, TailwindCSS, daisyUI, domPDF etc.
