@@ -52,6 +52,11 @@ const formattedDate = (date) => {
                     <div>
                         <a
                             class="btn btn-sm btn-accent rounded shadow-xl text-white"
+                            :class="
+                                invoice.products.length == 0
+                                    ? 'btn-disabled'
+                                    : ''
+                            "
                             :href="
                                 route('invoice.generate.pdf', {
                                     invoice: invoice.id,
